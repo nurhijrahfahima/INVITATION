@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Autoplay Video with Sound</title>
+  <style>
+    /* Fullscreen center */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+      max-height: 100%;
+    }
+
+    /* Sound button style */
+    #soundBtn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.8);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Video -->
+  <video id="myVideo" autoplay loop muted playsinline>
+    <source src="INVITATION/invitation.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+
+  <!-- Button to enable sound -->
+  <button id="soundBtn">🔊 Click to Hear Sound</button>
+
+  <script>
+    const video = document.getElementById('myVideo');
+    const btn = document.getElementById('soundBtn');
+
+    // Enable sound on button click
+    btn.addEventListener('click', () => {
+      video.muted = false;      // Unmute video
+      video.play();             // Start playing (in case browser paused)
+      btn.style.display = 'none'; // Hide button
+    });
+
+    // Optional: autoplay again if paused by browser
+    video.addEventListener('pause', () => {
+      video.play().catch(() => {});
+    });
+  </script>
+
+</body>
+</html>
